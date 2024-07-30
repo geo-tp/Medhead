@@ -3,7 +3,6 @@ package com.openclassrooms.medhead.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.medhead.model.Hospital;

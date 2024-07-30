@@ -1,7 +1,6 @@
 package com.openclassrooms.medhead.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.medhead.repository.HospitalRepository;
@@ -12,11 +11,8 @@ import java.util.Optional;
 
 
 @Service
-public class GoogleMapDistanceService {
+public class GoogleMapDistanceService implements DistanceService{
 
-    @Value("${map.key}")
-    private String apiKey;
-    
     @Autowired
     private HospitalRepository hospitalRepository;
     
