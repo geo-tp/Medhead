@@ -24,7 +24,7 @@ Update the application.properties file in the src/main/resources directory with 
 - **URL**: /hospitals
 - **Method**: GET
 - **Auth**: Not Protected
-- **Query**: Parameters: None
+- **Query Parameters**: None
 - **Example Request**: ```curl -X GET "http://localhost:9000/hospitals"```
 - **Response**: Returns all hospitals.
 ```
