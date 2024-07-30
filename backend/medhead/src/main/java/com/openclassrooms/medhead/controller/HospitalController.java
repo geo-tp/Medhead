@@ -18,6 +18,7 @@ public class HospitalController {
     @Autowired
     private HospitalService hospitalService;
     
+    @Autowired
     private DistanceService distanceService;
     
     public HospitalController() {
