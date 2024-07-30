@@ -7,8 +7,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.openclassrooms.medhead.repository.HospitalRepository;
+import com.openclassrooms.medhead.adapter.GoogleMapAdapter;
+import com.openclassrooms.medhead.adapter.JsonAdapter;
 import com.openclassrooms.medhead.model.Hospital;
-import com.openclassrooms.medhead.adapters.JsonAdapter;
 
 import java.util.Optional;
 
@@ -16,20 +17,18 @@ import java.util.Optional;
 @Service
 public class DistanceService {
 
-    @Value("${api.key}")
+    @Value("${map.key}")
     private String apiKey;
     
     @Autowired
     private HospitalRepository hospitalRepository;
     
     private final JsonAdapter jsonAdapter;
-
     private final RestTemplate restTemplate;
     
-
-    public DistanceService(JsonAdapter jsonAdapter) {
+    public DistanceService() {
         this.restTemplate = new RestTemplate();
-        this.jsonAdapter = jsonAdapter;
+        this.jsonAdapter = new GoogleMapAdapter();
     }
     
     

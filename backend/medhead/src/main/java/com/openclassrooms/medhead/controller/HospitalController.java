@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.openclassrooms.medhead.model.Hospital;
 import com.openclassrooms.medhead.service.HospitalService;
 import com.openclassrooms.medhead.service.DistanceService;
-import com.openclassrooms.medhead.adapters.JsonAdapter;
-import com.openclassrooms.medhead.config.JsonAdapterConfig;
 
 @RestController
 public class HospitalController {
@@ -20,13 +18,10 @@ public class HospitalController {
     @Autowired
     private HospitalService hospitalService;
     
-    @Autowired
     private DistanceService distanceService;
     
-    @Autowired
-    public HospitalController(JsonAdapterConfig jsonAdapterConfig) {
-    	JsonAdapter jsonAdapter = jsonAdapterConfig.getJsonAdapter();
-        this.distanceService = new DistanceService(jsonAdapter);
+    public HospitalController() {
+        this.distanceService = new DistanceService();
     }
     
     @GetMapping("/hospitals")
