@@ -6,11 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GoogleMapAdapter implements JsonAdapter {
+public class GoogleMapJsonAdapter implements JsonAdapter {
 
     private final ObjectMapper objectMapper;
 
-    public GoogleMapAdapter() {
+    public GoogleMapJsonAdapter() {
         this.objectMapper = new ObjectMapper();
     }
 
