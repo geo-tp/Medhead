@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.medhead.model.Hospital;
 import com.openclassrooms.medhead.service.HospitalService;
-import com.openclassrooms.medhead.service.DistanceService;
+import com.openclassrooms.medhead.service.GoogleMapDistanceService;
 
 @RestController
 public class HospitalController {
@@ -19,10 +19,10 @@ public class HospitalController {
     private HospitalService hospitalService;
     
     @Autowired
-    private DistanceService distanceService;
+    private GoogleMapDistanceService distanceService;
     
     public HospitalController() {
-        this.distanceService = new DistanceService();
+        this.distanceService = new GoogleMapDistanceService();
     }
     
     @GetMapping("/hospitals")
