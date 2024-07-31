@@ -2,7 +2,6 @@ package com.openclassrooms.medhead.client;
 
 import com.openclassrooms.medhead.adapter.GoogleMapJsonAdapter;
 import com.openclassrooms.medhead.adapter.JsonAdapter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -17,7 +16,6 @@ public class GoogleMapDistanceClient implements DistanceClient {
     private final RestTemplate restTemplate;
     private final JsonAdapter jsonAdapter;
 
-    @Autowired
     public GoogleMapDistanceClient() {
         this.restTemplate = new RestTemplate();
         this.jsonAdapter = new GoogleMapJsonAdapter();
