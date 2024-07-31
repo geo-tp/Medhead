@@ -1,8 +1,6 @@
 package com.openclassrooms.medhead.client;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import com.openclassrooms.medhead.adapter.GoogleMapJsonAdapter;
 import com.openclassrooms.medhead.adapter.JsonAdapter;
