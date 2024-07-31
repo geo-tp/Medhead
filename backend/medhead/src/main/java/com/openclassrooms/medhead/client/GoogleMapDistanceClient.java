@@ -10,7 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Component
 public class GoogleMapDistanceClient implements DistanceClient {
 	
-    @Value("${map.key}")
+    @Value("${map.api.key}")
     private String apiKey;
 
     private final RestTemplate restTemplate;
@@ -25,11 +25,6 @@ public class GoogleMapDistanceClient implements DistanceClient {
     public int getDistance(double originLat, double originLng, double destLat, double destLng) {
         String url = buildUrl(originLat, originLng, destLat, destLng);
         String response = restTemplate.getForObject(url, String.class);
-        
-        // Log the response for debugging purposes
-        System.out.println("Google API Response: " + response);
-        System.out.println("API Key: " + apiKey);
-
         
         return jsonAdapter.extractDistanceFromResponse(response);
     }

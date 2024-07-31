@@ -1,10 +1,13 @@
 package com.openclassrooms.medhead.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.medhead.repository.HospitalRepository;
 import com.openclassrooms.medhead.client.DistanceClient;
+import com.openclassrooms.medhead.client.GoogleMapDistanceClient;
+import com.openclassrooms.medhead.client.OpenStreetMapDistanceClient;
 import com.openclassrooms.medhead.model.Hospital;
 
 import java.util.Optional;
@@ -12,14 +15,27 @@ import java.util.Optional;
 
 @Service
 public class DistanceService {
+	
+    @Value("${map.api.name}")
+    private String apiName;
 
     @Autowired
     private HospitalRepository hospitalRepository;
     
     private final DistanceClient distanceClient;
     
-    public DistanceService(DistanceClient distanceClient) {
-        this.distanceClient = distanceClient;
+    public DistanceService() {   
+    	apiName = "googlemap";
+        switch (apiName) {
+	        case "googlemap":
+	            this.distanceClient = new GoogleMapDistanceClient();
+	            break;
+	        case "openstreetmap":
+	            this.distanceClient = new OpenStreetMapDistanceClient();
+	            break;
+	        default:
+	            throw new IllegalArgumentException("Unknown map API: " + apiName);
+        }
     }
     
     public Optional<Hospital> getNearestAvailableHospital(double latitude, double longitude) {
