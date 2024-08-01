@@ -23,7 +23,6 @@ public class GoogleMapJsonAdapter implements JsonAdapter {
             JsonNode distance = elements.path("distance");
             return distance.path("value").asInt();
         } catch (Exception e) {
-            e.printStackTrace();
             return -1;
         }
     }
