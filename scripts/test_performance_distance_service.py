@@ -1,7 +1,7 @@
 import requests
 import random
 
-NUMBER_OF_REQUESTS = 100
+NUMBER_OF_REQUEST = 100
 URL = "http://localhost:9000/hospital/nearest"
 USERNAME = "admin"
 PASSWORD = "adminpassword"
@@ -18,9 +18,9 @@ def send_request(lat, lng):
     try:
         response = requests.get(final_url, auth=requests.auth.HTTPBasicAuth(USERNAME, PASSWORD), timeout=10)
         if response.status_code == 200:
-            elapsed_time = response.elapsed.total_seconds()
-            print(f"Request successful: {elapsed_time} sec")
-            return elapsed_time
+            time_taken = response.elapsed.total_seconds()
+            print(f"Request successful: {time_taken} sec")
+            return time_taken
         else:
             print(f"Request failed with status code: {response.status_code}")
             return None
@@ -33,7 +33,7 @@ def main():
     total_time = 0.0
     successful_requests = 0
 
-    for _ in range(NUMBER_OF_REQUESTS):
+    for _ in range(NUMBER_OF_REQUEST):
         lat, lng = generate_random_coords()
         time_taken = send_request(lat, lng)
         if time_taken is not None:
@@ -45,7 +45,7 @@ def main():
     else:
         avg_time = 0
 
-    print(f"Total requests: {NUMBER_OF_REQUESTS}")
+    print(f"Total requests: {NUMBER_OF_REQUEST}")
     print(f"Successful requests: {successful_requests}")
     print(f"Total time taken: {total_time:.2f} seconds")
     print(f"Average time per request: {avg_time:.2f} seconds")
