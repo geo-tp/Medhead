@@ -11,39 +11,73 @@ interface Hospital {
 
 function App() {
   const [nearestHospital, setNearestHospital] = useState<Hospital | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [latitude, setLatitude] = useState<string>('41.8785');
+  const [longitude, setLongitude] = useState<string>('-87.6292');
+  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchNearestHospital = async () => {
-      try {
-        const data = await getNearestAvailableHospital(41.8785, -87.6292); // Coords proche General Hospital
-        setNearestHospital(data);
-        setLoading(false)
-      } catch (error) {
-        console.error('Error fetching nearest hospital:', error);
-      }
-    };
+  const fetchNearestHospital = async (lat: number, lon: number) => {
+    setLoading(true);
+    try {
+      const data = await getNearestAvailableHospital(lat, lon);
+      setNearestHospital(data);
+      setError(null);
+    } catch (error) {
+      console.error('Error fetching nearest hospital:', error);
+      setError('Unable to fetch hospital data. Please try again.');
+    }
+    setLoading(false);
+  };
 
-    fetchNearestHospital();
-  }, []);
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    const lat = parseFloat(latitude);
+    const lon = parseFloat(longitude);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
+    fetchNearestHospital(lat, lon);
+  };
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1>{nearestHospital?.name}</h1>
-        <p>Address: {nearestHospital?.address}</p>
-        <p>Available Beds: {nearestHospital?.availableBeds}</p>
+        <h1>Nearest Hospital</h1>
+        <form className="App-form" onSubmit={handleSubmit}>
+          <div>
+            <label>
+              Lattitude
+            </label>
+              <input
+                required
+                type="text"
+                value={latitude}
+                onChange={(e) => setLatitude(e.target.value)}
+              />
+          </div>
+          <div>
+            <label>
+              Longitude
+            </label>
+            <input
+              required
+              type="text"
+              value={longitude}
+              onChange={(e) => setLongitude(e.target.value)}
+            />
+          </div>
+          <button type="submit">Find Hospital</button>
+        </form>
+        {loading && <div className="App-card">Loading...</div>}
+        {nearestHospital && (
+          <div className="App-card">
+            <h2>{nearestHospital.name}</h2>
+            <p>{nearestHospital.address}</p>
+            <p>Available Beds: {nearestHospital.availableBeds}</p>
+          </div>
+        )}
       </header>
     </div>
   );
-
-  
 }
 
 export default App;

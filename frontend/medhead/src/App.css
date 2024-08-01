@@ -3,7 +3,7 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 20vmin;
   pointer-events: none;
 }
 
@@ -26,6 +26,82 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.App-form div {
+  margin: 5px;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.App-form label {
+  width: 15vw;
+  text-align: left;
+  margin-right: 10px;
+  max-width: 200px;
+  min-width: 130px;
+
+}
+
+
+.App-form input {
+  margin-left: 10px;
+  width: 180px;
+  height: 30px;
+  font-size: 1em;
+  margin-left: 10px;
+  padding: 5px;
+  border: none;
+  padding-left: 10px;
+  border-radius: 5px;
+}
+
+.App-card {
+  border: 1px solid #61dafb;
+  margin-top: 30px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.App-card h2 {
+  margin: 0;
+}
+
+.App-card p {
+  margin: 10px;
+}
+
+
+h1 {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  font-size: 1.2em;
+}
+
+h2 {
+  margin-bottom: 10px;
+  font-size: 1em;
+}
+
+p {
+  font-size: .8em;
+
+}
+
+button {
+  color: white;
+  background-color: #61dafb;
+  font-size: 1em;
+  padding: 10px;
+  border-radius: 10px;
+  width: 20vw;
+  margin-top: 15px;
+  max-width: 400px;
+  min-width: 200px;
 }
 
 @keyframes App-logo-spin {
