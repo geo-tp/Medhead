@@ -72,7 +72,7 @@ Update the application.properties file in the src/main/resources directory with 
     "latitude": 40.7128,
     "longitude": -74.006,
     "availableBeds": 150
-},
+}
 ```
 
 ### Get Nearest Available Hospital
