@@ -5,7 +5,7 @@ MedHead is a POC with Spring Boot to find the nearest hospital with available be
 ## Prerequisites
 
 ### Backend
-- Java 11 or higher
+- Java 21 or higher
 - Maven
 - Google Maps API Key
 
