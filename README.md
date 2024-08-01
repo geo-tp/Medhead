@@ -15,7 +15,7 @@ MedHead is a POC with Spring Boot to find the nearest hospital with available be
 ## Configuration
 
 Update the application.properties file in the src/main/resources directory with the following content:
- ```map.key=YOUR_GOOGLE_MAPS_API_KEY```
+ ```map.api.key=YOUR_GOOGLE_MAPS_API_KEY```
 
 
 ## Endpoints
