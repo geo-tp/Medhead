@@ -27,6 +27,10 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
+
+    - name: Change directory to project
+      run: cd medhead/backend/medhead
+      
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
