@@ -22,9 +22,9 @@ function App() {
       const data = await getNearestAvailableHospital(lat, lon);
       setNearestHospital(data);
       setError(null);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error fetching nearest hospital:', error);
-      setError('Unable to fetch hospital data. Please try again.');
+      setError(error.response.data.error);
     }
     setLoading(false);
   };
@@ -68,6 +68,7 @@ function App() {
           <button type="submit">Find Hospital</button>
         </form>
         {loading && <div className="App-card">Loading...</div>}
+        {error && <div className="App-card">{error}</div>}
         {nearestHospital && (
           <div className="App-card">
             <h2>{nearestHospital.name}</h2>

@@ -7,7 +7,7 @@ const PASSWORD = 'adminpassword';
 export const getNearestAvailableHospital = async (lat: number, lng: number) => {
   try {
     const response = await axios.get(`${API_URL}`, {
-      params: { lat, lng }, // Ajout des coords à l'url
+      params: { lat, lng },
       auth: {
         username: USERNAME,
         password: PASSWORD
