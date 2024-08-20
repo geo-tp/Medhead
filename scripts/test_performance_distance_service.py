@@ -1,7 +1,9 @@
 import requests
 import random
+import concurrent.futures
 
-NUMBER_OF_REQUEST = 100
+NUMBER_OF_REQUESTS = 100
+NUMBER_OF_THREADS = 5
 URL = "http://localhost:9000/hospital/nearest"
 USERNAME = "admin"
 PASSWORD = "adminpassword"
@@ -28,24 +30,32 @@ def send_request(lat, lng):
         print(f"Request failed: {e}")
         return None
 
+def handle_requests(index):
+    """Function to handle individual request in a thread."""
+    lat, lng = generate_random_coords()
+    return send_request(lat, lng)
+
 def main():
-    """Main function to send num_requests requests with random coordinates and report the time taken."""
+    """Main function to send num_requests requests with random coordinates using threads."""
     total_time = 0.0
     successful_requests = 0
 
-    for _ in range(NUMBER_OF_REQUEST):
-        lat, lng = generate_random_coords()
-        time_taken = send_request(lat, lng)
-        if time_taken is not None:
-            total_time += time_taken
-            successful_requests += 1
+    with concurrent.futures.ThreadPoolExecutor(max_workers=NUMBER_OF_THREADS) as executor:
+        futures = [executor.submit(handle_requests, i) for i in range(NUMBER_OF_REQUESTS)]
+        
+        for future in concurrent.futures.as_completed(futures):
+            time_taken = future.result()
+            if time_taken is not None:
+                total_time += time_taken
+                successful_requests += 1
 
     if successful_requests > 0:
         avg_time = total_time / successful_requests
     else:
         avg_time = 0
 
-    print(f"Total requests: {NUMBER_OF_REQUEST}")
+    print(f"Total threads: {NUMBER_OF_THREADS}")
+    print(f"Total requests: {NUMBER_OF_REQUESTS}")
     print(f"Successful requests: {successful_requests}")
     print(f"Total time taken: {total_time:.2f} seconds")
     print(f"Average time per request: {avg_time:.2f} seconds")
