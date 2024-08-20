@@ -9,6 +9,7 @@ import com.openclassrooms.medhead.client.DistanceClient;
 import com.openclassrooms.medhead.client.GoogleMapDistanceClient;
 import com.openclassrooms.medhead.client.OpenStreetMapDistanceClient;
 import com.openclassrooms.medhead.model.Hospital;
+import com.openclassrooms.medhead.exception.HospitalNotFoundException;
 
 import java.util.Optional;
 
@@ -51,6 +52,10 @@ public class DistanceService {
                     nearestHospital = hospital;
                 }
             }
+        }
+        
+        if (nearestHospital == null) {
+            throw new HospitalNotFoundException();
         }
 
         return Optional.ofNullable(nearestHospital);
