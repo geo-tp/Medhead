@@ -53,17 +53,20 @@ public class DistanceServiceTest {
         hospital1.setAvailableBeds(5);
 
         // Mock de la méthode findAll du repository
-        // List<Hospital> hospitals = List.of(hospital1);
-        // when(hospitalRepository.findAll()).thenReturn(hospitals);
+        List<Hospital> hospitals = List.of(hospital1);
+        when(hospitalRepository.findAll()).thenReturn(hospitals);
 
         // Mock de la méthode getDistance du client
-        // when(distanceClient.getDistance(42.8781, -87.6298, 40.7128, -74.0060)).thenReturn(100);
+        when(distanceClient.getDistance(42.8781, -87.6298, 40.7128, -74.0060)).thenReturn(100);
+        
+        // Attach the mocked distanceClient to the distanceService
+        distanceService.setDistanceClient(distanceClient);
 
         // Appel de la méthode et vérification que le bon hôpital est retourné
-        // Hospital result = distanceService.getNearestAvailableHospital(42.8781, -87.6298).orElse(null);
+        Hospital result = distanceService.getNearestAvailableHospital(42.8781, -87.6298).orElse(null);
 
-        // assertEquals(hospital1.getId(), result.getId());
-        // assertEquals(hospital1.getLatitude(), result.getLatitude());
-        // assertEquals(hospital1.getLongitude(), result.getLongitude());
+        assertEquals(hospital1.getId(), result.getId());
+        assertEquals(hospital1.getLatitude(), result.getLatitude());
+        assertEquals(hospital1.getLongitude(), result.getLongitude());
     }
 }

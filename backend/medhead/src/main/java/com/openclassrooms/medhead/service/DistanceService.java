@@ -23,20 +23,29 @@ public class DistanceService {
     @Autowired
     private HospitalRepository hospitalRepository;
     
-    private final DistanceClient distanceClient;
+    private DistanceClient distanceClient;
     
     public DistanceService() {   
+        setDefaultDistanceClient();
+    }
+    
+    private void setDefaultDistanceClient() {
     	apiName = "googlemap";
         switch (apiName) {
-	        case "googlemap":
-	            this.distanceClient = new GoogleMapDistanceClient();
-	            break;
-	        case "openstreetmap":
-	            this.distanceClient = new OpenStreetMapDistanceClient();
-	            break;
-	        default:
-	            throw new IllegalArgumentException("Unknown map API: " + apiName);
+            case "googlemap":
+                this.distanceClient = new GoogleMapDistanceClient();
+                break;
+            case "openstreetmap":
+                this.distanceClient = new OpenStreetMapDistanceClient();
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown map API: " + apiName);
         }
+    }
+    
+    // Setter for testing purpose
+    public void setDistanceClient(DistanceClient distanceClient) {
+        this.distanceClient = distanceClient;
     }
     
     public Optional<Hospital> getNearestAvailableHospital(double latitude, double longitude) {
