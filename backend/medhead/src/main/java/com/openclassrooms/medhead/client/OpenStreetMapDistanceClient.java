@@ -1,18 +1,15 @@
 package com.openclassrooms.medhead.client;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import com.openclassrooms.medhead.adapter.OpenStreetMapJsonAdapter;
 import com.openclassrooms.medhead.adapter.JsonAdapter;
 
+@Component
 public class OpenStreetMapDistanceClient implements DistanceClient {
 	
 	
 	// Placeholder pour valider l'implémentation de plusieurs API
-	
-	
-    @Value("${map.key}")
-    private String apiKey;
 
     private final JsonAdapter jsonAdapter;
 

@@ -3,6 +3,7 @@ package com.openclassrooms.medhead.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import jakarta.annotation.PostConstruct;
 
 import com.openclassrooms.medhead.repository.HospitalRepository;
 import com.openclassrooms.medhead.client.DistanceClient;
@@ -23,23 +24,28 @@ public class DistanceService {
     @Autowired
     private HospitalRepository hospitalRepository;
     
+    @Autowired
+    private GoogleMapDistanceClient googleMapDistanceClient;
+
+    @Autowired
+    private OpenStreetMapDistanceClient openStreetMapDistanceClient;
+    
     private DistanceClient distanceClient;
     
-    public DistanceService() {   
-        setDefaultDistanceClient();
+    public DistanceService() {
     }
     
+    @PostConstruct
     private void setDefaultDistanceClient() {
-    	apiName = "googlemap";
-        switch (apiName) {
+        switch (this.apiName) {
             case "googlemap":
-                this.distanceClient = new GoogleMapDistanceClient();
+                this.distanceClient = googleMapDistanceClient;
                 break;
             case "openstreetmap":
-                this.distanceClient = new OpenStreetMapDistanceClient();
+                this.distanceClient = openStreetMapDistanceClient;
                 break;
             default:
-                throw new IllegalArgumentException("Unknown map API: " + apiName);
+                throw new IllegalArgumentException("Unknown map API: " + this.apiName);
         }
     }
     

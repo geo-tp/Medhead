@@ -6,6 +6,8 @@ import com.openclassrooms.medhead.model.Hospital;
 import com.openclassrooms.medhead.repository.HospitalRepository;
 import com.openclassrooms.medhead.service.DistanceService;
 
+import org.springframework.test.context.TestPropertySource;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,6 +20,13 @@ import static org.mockito.Mockito.when;
 import java.util.List;
 import java.util.Collections;
 
+@TestPropertySource(properties = {
+	    "map.api.name=googlemap"
+})
+
+@TestPropertySource(properties = {
+	    "map.api.key=XXXXXXXXXXXXXXXXXXXXXXXX"
+})
 
 
 @ExtendWith(MockitoExtension.class)

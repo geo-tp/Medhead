@@ -30,6 +30,7 @@ public class GoogleMapDistanceClient implements DistanceClient {
     }
 
     private String buildUrl(double originLat, double originLng, double destLat, double destLng) {
+    	
         return UriComponentsBuilder.fromHttpUrl("https://maps.googleapis.com/maps/api/distancematrix/json")
                 .queryParam("origins", originLat + "," + originLng)
                 .queryParam("destinations", destLat + "," + destLng)
