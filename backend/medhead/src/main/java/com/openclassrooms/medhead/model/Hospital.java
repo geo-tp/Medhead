@@ -29,6 +29,9 @@ public class Hospital {
 
     @Column(name = "available_beds", nullable = false)
     private int availableBeds;
+    
+    @Column(name = "specialization", nullable = false)
+    private String specialization;
 
     // Getters
     public Long getId() {
@@ -55,6 +58,10 @@ public class Hospital {
         return availableBeds;
     }
     
+    public String getSpecialization() {
+        return specialization;
+    }
+    
     // Setters
     public void setId(Long id) {
         this.id = id;
@@ -78,5 +85,9 @@ public class Hospital {
 
     public void setAvailableBeds(int availableBeds) {
         this.availableBeds = availableBeds;
+    }
+
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
     }
 }

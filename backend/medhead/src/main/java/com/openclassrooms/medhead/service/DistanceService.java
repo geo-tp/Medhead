@@ -54,13 +54,14 @@ public class DistanceService {
         this.distanceClient = distanceClient;
     }
     
-    public Optional<Hospital> getNearestAvailableHospital(double latitude, double longitude) {
+    public Optional<Hospital> getNearestAvailableHospital(double latitude, double longitude, String specialization) {
         Iterable<Hospital> hospitals = hospitalRepository.findAll();
         Hospital nearestHospital = null;
         int shortestDistance = Integer.MAX_VALUE;
 
         for (Hospital hospital : hospitals) {
-            if (hospital.getAvailableBeds() > 0) {
+            // Filtrer par specialisation et lits disponibles
+            if (hospital.getAvailableBeds() > 0 && hospital.getSpecialization().equalsIgnoreCase(specialization)) {
                 int distance = distanceClient.getDistance(latitude, longitude, hospital.getLatitude(), hospital.getLongitude());
                 if (distance != -1 && distance < shortestDistance) {
                     shortestDistance = distance;

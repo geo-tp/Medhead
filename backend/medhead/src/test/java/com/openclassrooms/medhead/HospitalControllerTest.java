@@ -53,9 +53,13 @@ public class HospitalControllerTest {
         Hospital hospital = new Hospital();
         hospital.setLatitude(40.7128);
         hospital.setLongitude(-74.0060);
-        when(distanceService.getNearestAvailableHospital(41.8781, -87.6298)).thenReturn(Optional.of(hospital));
+        hospital.setSpecialization("General");
+        when(distanceService.getNearestAvailableHospital(41.8781, -87.6298, "General")).thenReturn(Optional.of(hospital));
 
-        mockMvc.perform(get("/hospital/nearest?lat=41.8781&lng=-87.6298"))
+        mockMvc.perform(get("/hospital/nearest")
+                .param("lat", "41.8781")
+                .param("lng", "-87.6298")
+                .param("specialization", "General")) // Ajout de la spécialisation
                 .andExpect(status().isOk());
     }
 }

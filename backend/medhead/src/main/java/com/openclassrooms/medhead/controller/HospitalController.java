@@ -37,8 +37,9 @@ public class HospitalController {
     }
 
     @GetMapping("/hospital/nearest")
-    public Optional<Hospital> getNearestAvailableHospital(@RequestParam double lat, @RequestParam double lng) {
-        return distanceService.getNearestAvailableHospital(lat, lng);
+    public Optional<Hospital> getNearestAvailableHospital(@RequestParam double lat, @RequestParam double lng, @RequestParam String specialization) {
+        return distanceService.getNearestAvailableHospital(lat, lng, specialization);
     }
+
 
 }

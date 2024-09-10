@@ -48,7 +48,7 @@ public class DistanceServiceTest {
 
         // Vérification que l'exception est levée
         assertThrows(HospitalNotFoundException.class, () -> {
-            distanceService.getNearestAvailableHospital(42.8781, -87.6298);
+            distanceService.getNearestAvailableHospital(42.8781, -87.6298, "General");
         });
     }
 
@@ -60,6 +60,7 @@ public class DistanceServiceTest {
         hospital1.setLatitude(40.7128);
         hospital1.setLongitude(-74.0060);
         hospital1.setAvailableBeds(5);
+        hospital1.setSpecialization("General");
 
         // Mock de la méthode findAll du repository
         List<Hospital> hospitals = List.of(hospital1);
@@ -72,7 +73,7 @@ public class DistanceServiceTest {
         distanceService.setDistanceClient(distanceClient);
 
         // Appel de la méthode et vérification que le bon hôpital est retourné
-        Hospital result = distanceService.getNearestAvailableHospital(42.8781, -87.6298).orElse(null);
+        Hospital result = distanceService.getNearestAvailableHospital(42.8781, -87.6298, "General").orElse(null);
 
         assertEquals(hospital1.getId(), result.getId());
         assertEquals(hospital1.getLatitude(), result.getLatitude());
