@@ -3,7 +3,7 @@ import random
 import concurrent.futures
 
 NUMBER_OF_REQUESTS = 100
-NUMBER_OF_THREADS = 5
+NUMBER_OF_THREADS = 20
 URL = "http://localhost:9000/hospital/nearest"
 USERNAME = "admin"
 PASSWORD = "adminpassword"
