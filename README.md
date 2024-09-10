@@ -17,6 +17,13 @@ MedHead is a POC with Spring Boot to find the nearest hospital with available be
 Update the application.properties file in the src/main/resources directory with the following content:
  ```map.api.key=YOUR_GOOGLE_MAPS_API_KEY```
 
+## Authentication
+Basic authentication has been implemented, requiring a username and password to access the service for added security.
+
+## Tests
+There is a "scripts" folder containing:
+- test_performance_distance_service.py : Calculate the average response time for the distance API
+- test_nearest_hospital_end_to_end.py  : Open the app in a browser and send a request to obtain an hospital reponse
 
 ## Endpoints
 
