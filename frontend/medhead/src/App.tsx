@@ -14,12 +14,13 @@ function App() {
   const [loading, setLoading] = useState<boolean>(false);
   const [latitude, setLatitude] = useState<string>('41.8785');
   const [longitude, setLongitude] = useState<string>('-87.6292');
+  const [specialization, setSpecialization] = useState<string>('General'); // État pour la spécialisation
   const [error, setError] = useState<string | null>(null);
 
   const fetchNearestHospital = async (lat: number, lon: number) => {
     setLoading(true);
     try {
-      const data = await getNearestAvailableHospital(lat, lon);
+      const data = await getNearestAvailableHospital(lat, lon, specialization);
       setNearestHospital(data);
       setError(null);
     } catch (error: any) {
@@ -64,6 +65,18 @@ function App() {
               value={longitude}
               onChange={(e) => setLongitude(e.target.value)}
             />
+          </div>
+          <div>
+            <label>
+              Specialization
+            </label>
+            <select
+              value={specialization}
+              onChange={(e) => setSpecialization(e.target.value)}
+            >
+              <option value="General">General</option>
+              <option value="Cardiology">Cardiology</option>
+            </select>
           </div>
           <button type="submit">Find Hospital</button>
         </form>

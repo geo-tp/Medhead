@@ -4,10 +4,10 @@ const API_URL = 'http://localhost:9000/hospital/nearest'; // Endpoint pour trouv
 const USERNAME = 'admin';
 const PASSWORD = 'adminpassword';
 
-export const getNearestAvailableHospital = async (lat: number, lng: number) => {
+export const getNearestAvailableHospital = async (lat: number, lng: number, specialization: string) => {
   try {
     const response = await axios.get(`${API_URL}`, {
-      params: { lat, lng },
+      params: { lat, lng, specialization },
       auth: {
         username: USERNAME,
         password: PASSWORD
