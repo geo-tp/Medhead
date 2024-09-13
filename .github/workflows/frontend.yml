@@ -16,9 +16,6 @@ jobs:
     - name: Build Docker image for Frontend
       run: docker build -t frontend-app ./frontend/medhead
 
-    - name: Run Docker container to build Frontend
-      run: docker run --rm frontend-app npm install && npm run build
-
     - name: Upload Frontend Build Artifacts
       uses: actions/upload-artifact@v3
       with:
